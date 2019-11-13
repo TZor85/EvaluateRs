@@ -9,6 +9,7 @@ namespace EvaluateRs.Data.Residentes
     public class Residente
     {
 
+        [Key]
         public int Id { get; set; }
 
         [Required (ErrorMessage = "El nombre es requerido")]

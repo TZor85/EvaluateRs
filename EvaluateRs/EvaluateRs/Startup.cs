@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using EvaluateRs.Areas.Identity;
 using EvaluateRs.Data;
 using EvaluateRs.Data.Residentes;
+using EvaluateRs.Areas.Identity.Data;
 
 namespace EvaluateRs
 {
@@ -35,11 +36,11 @@ namespace EvaluateRs
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddSingleton<WeatherForecastService>();
 
             services.AddSingleton<IResidentesService, ResidenteService>();
