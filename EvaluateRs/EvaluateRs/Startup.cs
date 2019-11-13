@@ -43,7 +43,8 @@ namespace EvaluateRs
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddSingleton<WeatherForecastService>();
 
-            services.AddSingleton<IResidentesService, ResidenteService>();
+            services.AddScoped<IResidentesService, ResidenteService>();
+            //services.AddSingleton<IResidentesService, ResidenteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

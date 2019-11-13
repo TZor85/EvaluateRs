@@ -1,35 +1,42 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EvaluateRs.Data.Residentes
 {
     public enum EspecialidadesEnum
     {
-        [Description("Medicina Familiar y Comunitaria")]
+        [Display(Name = "Medicina Familiar y Comunitaria")]
         MedicinaFamiliarComunitaria,
-        [Description("Medicina Intensiva")]
-        MedicinaIntensiva,
-        [Description("Medicina Interna")]
+        [Display(Name = "Anestesiología y Reanimación")]
+        Anestesiologia,
+        [Display(Name = "Medicina Interna")]
         MedicinaInterna,
-        [Description("Cardiología")]
+        [Display(Name = "Cardiología")]
         Cardiologia,
-        [Description("Cirugía General")]
+        [Display(Name = "Neumología")]
+        Neumologia,
+        [Display(Name = "Medicina Intensiva")]
+        MedicinaIntensiva,
+        [Display(Name = "Cirugía General")]
         CirugiaGeneral,
+        [Display(Name = "Radiodiagnóstico")]
+        Radiodiagnostico,
         [Description("Cirugía Ortopédica y Traumatología")]
         Traumatologia,
-        [Description("Oncología Médica")]
-        OncologiaMedica,
-        [Description("Oncología Radioterápica")]
-        OncologiaRadioterapica,
-        [Description("Radiodiagnóstico")]
-        Radiodiagnostico,
         [Description("Medicina Preventiva")]
         MedicinaPreventiva,
+        [Description("Oncología Radioterápica")]
+        OncologiaRadioterapica,
+        [Description("Medicina Nuclear")]
+        MedicinaNuclear,
         [Description("Psiquiatría")]
         Psiquiatria,
-        [Description("Neumología")]
-        Neumologia,
-        [Description("Anestesiología")]
-        Anestesiologia
+        [Description("Urologia")]
+        Urologia,
+        [Description("Oncología Médica")]
+        OncologiaMedica,
+        [Description("Dermatología")]
+        Dermatologia
 
     }
 }

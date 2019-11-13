@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,33 +8,40 @@ namespace EvaluateRs.Data.Residentes
 {
     public class ResidenteService : IResidentesService
     {
+        
 
         public DateTime CreationDate { get; set; }
         public List<Residente> Residentes { get; set; }
 
-        public ResidenteService()
+        public EspecialidadesEnum Especialidades { get; set; }
+
+        private ApplicationDbContext _context;
+
+        public ResidenteService(ApplicationDbContext context)
         {
+            _context = context;
+
             CreationDate = DateTime.Now;
 
-            Residentes = new List<Residente>
-            {
-                new Residente { Id = 1, Nombre = "Ester Guilló Quiles", AnyoResidencia = 5, Especialidad = EspecialidadesEnum.MedicinaFamiliarComunitaria },
-                new Residente { Id = 2, Nombre = "Alberto Cervantes Bañón", AnyoResidencia = 1, Especialidad = EspecialidadesEnum.CirugiaGeneral },
-                new Residente { Id = 3, Nombre = "Natalia Guilló Quiles", AnyoResidencia = 3, Especialidad = EspecialidadesEnum.OncologiaMedica },
-                new Residente { Id = 4, Nombre = "Arturo Fernández Ochoa", AnyoResidencia = 2, Especialidad = EspecialidadesEnum.Traumatologia },
-                new Residente { Id = 5, Nombre = "Armando Martí Martinez", AnyoResidencia = 1, Especialidad = EspecialidadesEnum.MedicinaInterna },
-            };
+            //Residentes = new List<Residente>
+            //{
+            //    new Residente { Id = 1, Nombre = "Ester Guilló Quiles", AnyoResidencia = 5, Especialidad = EspecialidadesEnum.MedicinaFamiliarComunitaria },
+            //    new Residente { Id = 2, Nombre = "Alberto Cervantes Bañón", AnyoResidencia = 1, Especialidad = EspecialidadesEnum.CirugiaGeneral },
+            //    new Residente { Id = 3, Nombre = "Natalia Guilló Quiles", AnyoResidencia = 3, Especialidad = EspecialidadesEnum.OncologiaMedica },
+            //    new Residente { Id = 4, Nombre = "Arturo Fernández Ochoa", AnyoResidencia = 2, Especialidad = EspecialidadesEnum.Traumatologia },
+            //    new Residente { Id = 5, Nombre = "Armando Martí Martinez", AnyoResidencia = 1, Especialidad = EspecialidadesEnum.MedicinaInterna },
+            //};
 
         }
 
         public List<Residente> GetResidentes()
         {
-            return Residentes;
+            return _context.Residentes.ToList();
         }
 
         public Residente GetResidenteById(int residenteId)
         {
-            return Residentes.Where(x => x.Id == residenteId).FirstOrDefault();
+            return _context.Residentes.Where(x => x.Id == residenteId).FirstOrDefault();
         }
 
         public DateTime GetCreateDate()
@@ -48,11 +56,8 @@ namespace EvaluateRs.Data.Residentes
 
         public void SaveResidente(Residente residente)
         {
+            _context.Residentes.Add(residente);
 
-
-            residente.Id = Residentes.Count() + 1;
-
-            Residentes.Add(residente);
         }
     }
 }

@@ -1,0 +1,17 @@
+﻿@if (IsVisible)
+{
+    <div id="divServerValidations" class="col-lg-10 col-sm-10 col-md-10 alert alert-info">
+        <span>El residente @ChildContent, se ha guardado correctamente</span>
+    </div>
+}
+
+
+@code {
+
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}
