@@ -1,0 +1,50 @@
+﻿@page "/NuevoResidente"
+@inject IResidentesService residenteService
+@inject IJSRuntime JSRuntime
+
+<h3>Nuevo Residente</h3>
+<hr />
+
+<div class="col-lg-12 col-sm-12 col-md-12">
+    <EditForm Model="@residente" OnValidSubmit="@SaveResidente">
+        <div class="col-lg-12 col-sm-12 col-md-12 row">
+            <label class="col-lg-12 col-sm-12 col-md-12 font-weight-bold">Nombre:</label>
+            <input class="form-control col-lg-3 col-sm-3 col-md-3" @bind-value="residente.Nombre" placeholder="Nombre" />
+            &nbsp;<ValidationMessage For="(() => residente.Nombre)" />
+        </div>
+        <br />
+        <div class="col-lg-12 col-sm-12 col-md-12 row">
+            <label class="col-lg-12 col-sm-12 col-md-12 font-weight-bold">Año Residencia:</label>
+            <InputNumber class="form-control col-lg-3 col-sm-3 col-md-3" @bind-Value="residente.AnyoResidencia" placeholder="Año Residencia" />
+            &nbsp;<ValidationMessage For="(() => residente.AnyoResidencia)" />
+        </div>
+        <br />
+        <div class="col-lg-12 col-sm-12 col-md-12 row">
+            <span class="col-lg-2 col-sm-2 col-md-2"></span>
+            <input type="submit" class="form-control col-lg-1, col-md-1 col-sm-1 btn btn-primary" value="Guardar" />
+            <span>&nbsp;</span>
+            <input type="submit" class="form-control col-lg-1, col-md-1 col-sm-1 btn btn-primary" value="Limpiar" />
+        </div>
+
+    </EditForm>
+</div>
+
+
+    @code {
+
+        public Residente residente { get; set; } = new Residente();
+        public string RecordName { get; set; }
+        ElementReference NombreText;
+
+        private async Task SaveResidente()
+        {
+            residenteService.SaveResidente(residente);
+            var Nombre = residente.Nombre;
+            RecordName = residente.Nombre;
+            residente = new Residente();
+
+
+            //    //await JSRuntime.InvokeVoidAsync("saveMessage", Nombre);
+            await JSRuntime.InvokeVoidAsync("setFocusOnElement", NombreText);
+        }
+    }

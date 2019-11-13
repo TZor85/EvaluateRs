@@ -1,0 +1,34 @@
+﻿@page "/residentes/ResidenteDetail/{residenteId:int}"
+@page "/residentes/ResidenteDetail"
+@page "/residente"
+@inject IResidentesService residenteService
+@using EvaluateRs.Data.Residentes;
+
+
+<h3>Residente Detail</h3>
+<hr />
+
+<div class="col-12 row">
+    <h5 class="col-12 row" style="font-weight:bold">@ResidentesDetail.Nombre</h5>
+    <h6 class="col-12 row">Año de Residencia: @ResidentesDetail.AnyoResidencia</h6>
+</div>
+
+<hr />
+<div class="col-12 row">@residenteService.GetCreateDate()</div>
+<div class="col-12 row">Version: @residenteService.GetVersion()</div>
+
+@code {
+
+    [Parameter]
+    public int ResidenteId { get; set; }
+
+    public Residente ResidentesDetail { get; set; }
+    //public ResidenteService residenteService { get; set; }
+
+    protected override void OnInitialized()
+    {
+        //residenteService = new ResidenteService();
+        ResidentesDetail = residenteService.GetResidenteById(ResidenteId);
+    }
+
+}
